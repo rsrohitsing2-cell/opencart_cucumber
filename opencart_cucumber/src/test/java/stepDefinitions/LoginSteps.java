@@ -49,27 +49,16 @@ public class LoginSteps {
     public void click_on_login_button() {
         lp.clickLogin();
         BaseClass.getLogger().info("clicked on login button...");
-    	
-        
     }
 
-
-    @Then("the user should be redirected to the MyAccount Page")
-    public void user_navigates_to_my_account_page() {
-    	macc=new MyAccountPage(BaseClass.getDriver());
-		boolean targetpage=macc.isMyAccountPageExists();
-				
-		Assert.assertEquals(targetpage, true);
-        
-    }
 
     //*******   Data Driven test **************
-    @Then("the user should be redirected to the MyAccount Page by passing email and password with excel row {string}")
-    public void check_user_navigates_to_my_account_page_by_passing_email_and_password_with_excel_data(String rows)
+    @Then("the user should be redirected to the MyAccount Page by passing email and password with excel row {int}")
+    public void check_user_navigates_to_my_account_page_by_passing_email_and_password_with_excel_data(int rows)
     {
         datamap=DataReader.data(System.getProperty("user.dir")+"\\testData\\Opencart_LoginData.xlsx", "Sheet1");
 
-        int index=Integer.parseInt(rows)-1;
+        int index=rows-1;
         String email= datamap.get(index).get("username");
         String pwd= datamap.get(index).get("password");
         String exp_res= datamap.get(index).get("res");
